@@ -1,0 +1,39 @@
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+spring:
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 2MB
+  datasource:
+    url: ${DB_URL:jdbc:h2:file:./data/risk-review;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 3
+  sql:
+    init:
+      mode: ${DB_INIT_MODE:embedded}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+risk:
+  reviewer-token: ${REVIEWER_TOKEN:}
+  seed: ${DEMO_SEED:true}
+  as-of: '2026-10-05T12:00:00Z'
+  policy:
+    burst-count: 5
+    burst-minutes: 10
+    unusual-multiplier: 5
+    large-amount: 10000
+    minimum-history: 5
+    rapid-incoming-minimum: 20000
+    rapid-outflow-ratio: 0.8
+    rapid-minutes: 30
+    dormant-days: 30
+  ai:
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-2.5-flash}
+    base-url: https://generativelanguage.googleapis.com

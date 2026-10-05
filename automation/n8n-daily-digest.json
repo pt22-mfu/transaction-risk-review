@@ -1,0 +1,85 @@
+{
+  "name": "RiskDesk - Daily review digest",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Bangkok"
+  },
+  "nodes": [
+    {
+      "id": "schedule",
+      "name": "Daily schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "report",
+      "name": "Fetch risk report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "url": "https://YOUR_ACTUAL_APP_URL/api/reports/daily",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 90000
+        }
+      }
+    },
+    {
+      "id": "digest",
+      "name": "Prepare digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const report = $input.first().json;\nconst accounts = report.accounts || [];\nreturn [{ json: { snapshot: report.asOf, dataMode: 'SYNTHETIC', totalAccounts: accounts.length, highPriority: accounts.filter(a => a.analysis.priority === 'HIGH').map(a => ({ accountId: a.account.id, reviewAsOf: a.analysis.asOf, score: a.analysis.riskScore, reviewStatus: a.status, rules: a.analysis.findings.map(f => ({ title: f.title, evidence: f.transactionIds })) })), scope: report.scope } }];"
+      }
+    }
+  ],
+  "connections": {
+    "Daily schedule": {
+      "main": [
+        [
+          {
+            "node": "Fetch risk report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch risk report": {
+      "main": [
+        [
+          {
+            "node": "Prepare digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

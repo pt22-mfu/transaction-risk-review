@@ -1,0 +1,8 @@
+transaction_id,occurred_at,direction,amount,counterparty,description
+OLD1,2026-08-20T08:00:00+07:00,OUT,500,DEMO-GROCERY,Earlier fictional activity
+IN1,2026-10-05T09:00:00+07:00,IN,50000,DEMO-INCOME,Fictional incoming funds
+OUT1,2026-10-05T09:03:00+07:00,OUT,10000,DEMO-A,Fictional transfer
+OUT2,2026-10-05T09:05:00+07:00,OUT,10000,DEMO-B,Fictional transfer
+OUT3,2026-10-05T09:07:00+07:00,OUT,10000,DEMO-C,Fictional transfer
+OUT4,2026-10-05T09:09:00+07:00,OUT,10000,DEMO-D,Fictional transfer
+OUT5,2026-10-05T09:11:00+07:00,OUT,5000,DEMO-E,Fictional transfer
