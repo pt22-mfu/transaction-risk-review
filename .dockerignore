@@ -1,0 +1,8 @@
+.git
+.env*
+target
+data
+frontend/node_modules
+frontend/dist
+artifacts
+*.log
