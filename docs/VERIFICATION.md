@@ -1,4 +1,8 @@
-# Verification of MVP 0.2.0
+# Verification of RiskDesk 0.2.0
+
+Updated 06 October 2026. Frontend baseline: commit `3a1a8f2`. [Full PDF reference](RiskDesk_Technical_Documentation.pdf), page 20.
+
+The 39 Java tests below are recorded MVP results. No new Maven run is claimed for this documentation update; strict TypeScript checking and the production frontend build were rerun for the UI redesign.
 
 ## Completed in the build workspace
 - Java 17 compilation and Maven verify passed.
@@ -13,12 +17,25 @@
 - Mobile page had no horizontal overflow; no browser JavaScript runtime errors were recorded.
 - The n8n Code node's digest transformation was executed against the real Java report response and returned the high-priority synthetic account.
 
-## Not yet verified
-- Connection to the owner's Supabase database (no credentials supplied).
-- Real Gemini response, account quota or model availability (no API key supplied). Provider tests used a local simulated HTTP server.
-- n8n import/activation, hosted scheduling or notification delivery. The export remains inactive.
-- Render Docker build, public URL, cloud cold starts and deployment environment variables.
-- Windows launcher execution. Its PowerShell script was prepared; testing here used Java 17 on Linux.
+## Redesigned UI checks
+- Built React/TypeScript frontend exercised in Chromium against the existing Java backend.
+- Account switching, linked evidence, rule explanation, reviewer access, review saving/history, policy, automation, search, priority filters and CSV validation/import checked.
+- Widths 320, 390, 768, 1024, 1280, 1440 and 1920 pixels checked for page and tab-bar overflow.
+- At 1440 x 1000 the Save review action was within the initial viewport; desktop/mobile dashboard and import screenshots reviewed.
+- No browser runtime errors recorded.
+
+## Live deployment evidence
+- Owner confirmed the Render deployment and the redesigned UI.
+- Supabase PostgreSQL configured; account reads, fictional imports and saved review history demonstrated.
+- Live Gemini output displayed "AI generated" on a seeded and an imported account.
+- A saved pending-review note was independently retrieved through the account API.
+- The initial deployment encountered a PostgreSQL connection failure and subsequently recovered; the definitive root cause was not established.
+
+## Remaining separate checks
+- Controlled restart/redeploy test to explicitly verify imported data and review durability.
+- Hosted n8n import/activation, scheduled execution and chosen report destination. The export remains inactive.
+- Windows launcher execution. Its PowerShell script was prepared; the build workspace used Java 17 on Linux.
+- Production identity, access/audit controls, scale testing and evaluation on representative labelled data are outside this demo's acceptance scope.
 
 ## Dataset semantics
 Seeded data uses a fixed fictional snapshot. Imported accounts use the latest transaction timestamp from each fictional CSV. Expected behaviour is checked against handcrafted scenarios, not labelled real fraud data. No accuracy, recall or fraud-prevention performance claim is made.

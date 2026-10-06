@@ -6,7 +6,11 @@ A Java + TypeScript portfolio prototype by **Phyo Thant Kyaw (PT)**.
 
 Explore fictional account histories, inspect configurable risk rules, generate optional AI explanations and record review decisions.
 
-**Status:** runnable MVP. A public deployment, Supabase connection and live Gemini/n8n execution must be configured by the owner. No live URL is claimed in this source package.
+**Live demo:** [transaction-risk-review.onrender.com](https://transaction-risk-review.onrender.com)
+
+**Status as of 06 October 2026:** deployed on Render with Supabase PostgreSQL. The owner demonstrated live Gemini explanations, fictional CSV import and saved review history. The teal/gray dashboard update is based on commit `3a1a8f2`; the application version remains `0.2.0`. The n8n workflow is an inactive export; hosted scheduling is not activated.
+
+**Project handbook:** [RiskDesk Technical Documentation — PDF](docs/RiskDesk_Technical_Documentation.pdf). The 24-page reference covers architecture, database schema, rule boundaries, CSV handling, AI, APIs, setup, deployment, verification, troubleshooting and a demonstration guide. See [project notes](docs/PROJECT.md) for a shorter reference.
 
 ## Included
 - Spring Boot / Java 17 backend with five deterministic, configurable rules.
@@ -46,7 +50,7 @@ $env:REVIEWER_TOKEN = "local-demo-reviewer-2026"
 java -jar target/transaction-risk-review-0.2.0.jar
 ```
 
-Open **http://localhost:8080**. Click the PT avatar, enter your configured reviewer token, then save a fictional review note. The example token is for local demo use only; generate a new random token for hosting.
+Open **http://localhost:8080**. Click **Reviewer access** in the top bar, enter your configured reviewer token, then save a fictional review note. The example token is for local demo use only; generate a new random token for hosting.
 
 The Java Maven Wrapper downloads Maven; no manual Maven install or Ubuntu/Docker installation is needed. Keep the backend process running while using localhost.
 
@@ -108,7 +112,7 @@ Free Render services sleep when idle; the first request may take about a minute.
 
 ## Optional Gemini
 
-Set GEMINI_API_KEY on the server and optionally GEMINI_MODEL. Default model: `gemini-2.5-flash`; availability and quotas depend on your account. Live AI calls require the reviewer token and are limited to six per minute per server process. The response is validated; failures use an explicitly labelled fallback. No real Gemini call was made without the owner's API key.
+Set GEMINI_API_KEY on the server and optionally GEMINI_MODEL. Default model: `gemini-2.5-flash`; availability and quotas depend on your account. Live AI calls require the reviewer token and are limited to six per minute per server process. The response is validated; failures use an explicitly labelled fallback. The owner has configured and demonstrated live calls in the hosted demo. The hosted model was configured as `gemini-3.5-flash-lite`; the source default remains `gemini-2.5-flash`. Model choice is an environment setting, not evidence that every account has access to that model.
 
 ## Optional n8n
 
@@ -124,6 +128,6 @@ cd frontend
 npm run build
 ```
 
-See **docs/PROJECT.md** for acceptance criteria, API and limitations; **docs/VERIFICATION.md** records checks completed on this build.
+See **docs/PROJECT.md** for acceptance criteria, API and limitations; **docs/VERIFICATION.md** separates recorded automated tests, redesigned UI checks and live demonstration evidence. The PDF handbook provides the full reference.
 
 Official references: [Spring Boot](https://docs.spring.io/spring-boot/3.5/), [Supabase connections](https://supabase.com/docs/guides/database/connecting-to-postgres), [Render Docker](https://render.com/docs/docker), [Gemini structured output](https://ai.google.dev/gemini-api/docs/structured-output).

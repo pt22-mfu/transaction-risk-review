@@ -2,6 +2,13 @@
 
 Author: Phyo Thant Kyaw (PT), Mae Fah Luang University
 
+## Current build and full reference
+- Application: v0.2.0; redesigned frontend baseline: commit `3a1a8f2`.
+- Documentation: v1.0, 06 October 2026.
+- [Live demo](https://transaction-risk-review.onrender.com).
+- [24-page PDF handbook](RiskDesk_Technical_Documentation.pdf): detailed rule boundaries, database diagram, API examples, CSV contract, environment settings and troubleshooting.
+- Render + Supabase and live Gemini have been demonstrated. The inactive n8n export is included; hosted execution remains a separate setup step.
+
 ## Problem
 Reviewers need to prioritize unusual transaction activity and understand the evidence behind each signal. A large payment alone does not establish fraud. The prototype combines deterministic Java rules with optional LLM explanations and a human review workflow.
 
@@ -35,9 +42,9 @@ Risk score is a hand-designed priority score, not a calibrated fraud probability
 All seeded data is fictional. There is no automatic blocking, refund, account freezing or transfer capability. Production use would require actual authorization controls, tenant isolation, review governance and validation on representative data.
 
 ## Next increments
-1. Supabase-backed persistence verified against a dedicated demo project.
+1. Controlled restart verification of Supabase-backed persistence, plus a database-aware readiness endpoint.
 2. Hosted n8n schedule and chosen report destination.
-3. Reviewer identities, immutable actor attribution and case ownership.
+3. Reviewer identities, permissions, actor attribution and tamper-evident audit controls.
 4. Expanded scenario tests and measured false-positive behaviour.
 
 ## API
@@ -54,3 +61,5 @@ All seeded data is fictional. There is no automatic blocking, refund, account fr
 | GET | /api/reports/daily | Token | Snapshot report for n8n |
 
 Reviewer header: `X-Reviewer-Token`. Notes are visible to all demo visitors; use fictional information only.
+
+`/api/health` is a liveness response: it does not query the database or AI provider. Verify `/api/accounts` and `/api/meta` after deployment. Review records are append-only through the application API; a database administrator can still change them. AI explanations and unsaved notes are not persisted.
