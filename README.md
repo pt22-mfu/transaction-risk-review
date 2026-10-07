@@ -8,9 +8,11 @@ Explore fictional account histories, inspect configurable risk rules, generate o
 
 **Live demo:** [transaction-risk-review.onrender.com](https://transaction-risk-review.onrender.com)
 
-**Status as of 06 October 2026:** deployed on Render with Supabase PostgreSQL. The owner demonstrated live Gemini explanations, fictional CSV import and saved review history. The teal/gray dashboard update is based on commit `3a1a8f2`; the application version remains `0.2.0`. The n8n workflow is an inactive export; hosted scheduling is not activated.
+**Deployment:** Render with Supabase PostgreSQL. The owner previously demonstrated live Gemini explanations, fictional CSV import and saved review history. Application version: `0.2.0`. The n8n workflow remains an inactive export.
 
-**Project handbook:** [RiskDesk Technical Documentation — PDF](docs/RiskDesk_Technical_Documentation.pdf). The 24-page reference covers architecture, database schema, rule boundaries, CSV handling, AI, APIs, setup, deployment, verification, troubleshooting and a demonstration guide. See [project notes](docs/PROJECT.md) for a shorter reference.
+**UI refresh — 07 October 2026:** a green, white and charcoal palette inspired by KBank/K PLUS, with a darker action green for readable button labels. RiskDesk is an independent portfolio demo. Evidence and reviewer decisions now use a full-width reading column; the mobile queue scrolls within its card. The access dialog supports Escape, keyboard focus containment and returning focus to its opener. [Desktop preview](artifacts/riskdesk-viewport.png) · [Mobile preview](artifacts/riskdesk-mobile.png). Screenshots use controlled fictional API fixtures; they are not live banking data.
+
+**Project handbook:** [RiskDesk Technical Documentation — PDF](docs/RiskDesk_Technical_Documentation.pdf). The 24-page reference includes the earlier UI layout and covers architecture, database schema, rule boundaries, CSV handling, AI, APIs, setup, deployment, verification, troubleshooting and a demonstration guide. See [project notes](docs/PROJECT.md) for a shorter reference.
 
 ## Included
 - Spring Boot / Java 17 backend with five deterministic, configurable rules.

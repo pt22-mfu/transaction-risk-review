@@ -1,10 +1,21 @@
 # Verification of RiskDesk 0.2.0
 
-Updated 06 October 2026. Frontend baseline: commit `3a1a8f2`. [Full PDF reference](RiskDesk_Technical_Documentation.pdf), page 20.
+Updated 07 October 2026. Historical frontend baseline: commit `3a1a8f2`. [Full PDF reference](RiskDesk_Technical_Documentation.pdf), page 20.
 
 The 39 Java tests below are recorded MVP results. No new Maven run is claimed for this documentation update; strict TypeScript checking and the production frontend build were rerun for the UI redesign.
 
-## Completed in the build workspace
+## 07 October banking-style UI verification
+- TypeScript strict checking and production frontend build passed.
+- Chromium widths 1440, 1366, 1024, 768, 390, 375 and 320 pixels checked across the review, policy, automation and CSV import views. No page-wide horizontal overflow or JavaScript runtime errors.
+- Search, empty search results, priority filters, account switching, no-findings state, legitimate explanations, linked evidence and complete supplied history checked.
+- All four account tabs and arrow-key tab navigation checked.
+- Reviewer dialog checked for keyboard focus containment, Escape, close control and focus restoration. Background content is inert while open; page scrolling is restored on close.
+- AI output and saving/retrieving an escalated review were checked with **mock API responses**. These checks do not claim a new Gemini call or a write to hosted Supabase.
+- New desktop and mobile screenshots rendered and visually inspected. Screenshots use controlled fictional fixtures.
+- The reviewer decision form is below the evidence panel; it may require scrolling on desktop. This replaces the earlier three-column layout.
+- Backend, database schema, deterministic rules and authentication endpoints were not changed by this UI refresh. GitHub Actions runs the existing full Java verification on push.
+
+## Completed in the original MVP build workspace
 - Java 17 compilation and Maven verify passed.
 - 39 automated tests passed: 13 rule-engine tests, 10 original Spring API tests, 10 CSV parser tests, 4 import API tests and 2 simulated provider-response tests.
 - TypeScript strict checking and production frontend build passed.
@@ -17,7 +28,7 @@ The 39 Java tests below are recorded MVP results. No new Maven run is claimed fo
 - Mobile page had no horizontal overflow; no browser JavaScript runtime errors were recorded.
 - The n8n Code node's digest transformation was executed against the real Java report response and returned the high-priority synthetic account.
 
-## Redesigned UI checks
+## 06 October UI checks (historical)
 - Built React/TypeScript frontend exercised in Chromium against the existing Java backend.
 - Account switching, linked evidence, rule explanation, reviewer access, review saving/history, policy, automation, search, priority filters and CSV validation/import checked.
 - Widths 320, 390, 768, 1024, 1280, 1440 and 1920 pixels checked for page and tab-bar overflow.
