@@ -4,7 +4,7 @@ Updated 07 October 2026. Historical frontend baseline: commit `3a1a8f2`. [Full P
 
 The 39 Java tests below are recorded MVP results. No new Maven run is claimed for this documentation update; strict TypeScript checking and the production frontend build were rerun for the UI redesign.
 
-## 07 October banking-style UI verification
+## 07 October finance-dashboard UI verification
 - TypeScript strict checking and production frontend build passed.
 - Chromium widths 1440, 1366, 1024, 768, 390, 375 and 320 pixels checked across the review, policy, automation and CSV import views. No page-wide horizontal overflow or JavaScript runtime errors.
 - Search, empty search results, priority filters, account switching, no-findings state, legitimate explanations, linked evidence and complete supplied history checked.
@@ -50,3 +50,5 @@ The 39 Java tests below are recorded MVP results. No new Maven run is claimed fo
 
 ## Dataset semantics
 Seeded data uses a fixed fictional snapshot. Imported accounts use the latest transaction timestamp from each fictional CSV. Expected behaviour is checked against handcrafted scenarios, not labelled real fraud data. No accuracy, recall or fraud-prevention performance claim is made.
+
+The final reference-inspired theme uses a teal–blue backdrop, rounded floating workspace, and contrasting incoming/outgoing summary cards. The desktop/mobile interaction checks below were repeated after this CSS-only theme update.
